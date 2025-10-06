@@ -196,5 +196,49 @@ class SplashController extends GetxController{
       update();
     }
   }
+
+  // Check intro should be shown
+  bool showntro(){
+    return sharedPreferences.getBool(AppConstants.INTRO) ?? true;
+  }
+
+  // Disable intro
+  void disableIntro(){
+    sharedPreferences.setBool(AppConstants.INTRO, false);
+  }
+
+  // Set first time connection check
+void setFirstTimeConnectionCheck(bool isChecked){
+    _firstTimeConnectionCheck = isChecked;
+}
+
+// Get user address
+String? getUseAddress(){
+    return sharedPreferences.getString(AppConstants.USER_ADDRESS);
+}
+
+// Check if app need update
+bool get isUpdateRequired{
+    if(GetPlatform.isAndroid){
+      return AppConstants.APP_VERSION < (_configModel.appMinimumVersionAndriod ?? 0);
+    }else if(GetPlatform.isIOS){
+      return AppConstants.APP_VERSION < (_configModel.appMinimumVersionIos ?? 0);
+    }
+    return false;
+}
+
+// Check if app is in maintenance mode
+ bool get isMaintenanceMode{
+    return _configModel.maintenanceMode ?? false;
+ }
+
+ @override
+  void onInit(){
+    super.onInit();
+
+    // Initialize config when controller is created
+   getGonfigData();
+ }
+
 }
 
