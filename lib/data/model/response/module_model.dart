@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class ModuleModel{
+class ModuleModel {
   final int id;
   final String moduleName;
   final String moduleType;
@@ -12,8 +12,8 @@ class ModuleModel{
   final String? description;
 
   ModuleModel({
-   required this.id,
-   required this.moduleName,
+    required this.id,
+    required this.moduleName,
     required this.moduleType,
     required this.thumbnail,
     required this.storesCount,
@@ -21,16 +21,18 @@ class ModuleModel{
     required this.updatedAt,
     this.themeId,
     this.description,
-});
+  });
 
-  factory ModuleModel.fromJson(Map<String, dynamic> json){
+  factory ModuleModel.fromJson(Map<String, dynamic> json) {
     return ModuleModel(
       id: json["id"] ?? 0,
       moduleName: json["module_name"] ?? "",
       moduleType: json["module_type"] ?? "",
       thumbnail: json["thumbnail"] ?? "",
       storesCount: json["stores_count"] ?? 0,
-      createdAt: DateTime.parse(json["created_at"] ?? DateTime.now().toString()),
+      createdAt: DateTime.parse(
+        json["created_at"] ?? DateTime.now().toString(),
+      ),
       updatedAt: DateTime.parse(json["update_at"] ?? DateTime.now().toString()),
       themeId: json["theme_id"],
       description: json["description"],
@@ -38,18 +40,30 @@ class ModuleModel{
   }
 
   // To JSON
-
-Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
-      "id" : id,
-      "module_name" : moduleName,
-      "module_type" : moduleType,
-      "thumbnail" : thumbnail,
-      "stores_count" : storesCount,
-      "created_at" : createdAt.toIso8601String(),
-      "update_at" : updatedAt.toIso8601String(),
-      "theme_id" : themeId,
-      "description" : description,
+      "id": id,
+      "module_name": moduleName,
+      "module_type": moduleType,
+      "thumbnail": thumbnail,
+      "stores_count": storesCount,
+      "created_at": createdAt.toIso8601String(),
+      "update_at": updatedAt.toIso8601String(),
+      "theme_id": themeId,
+      "description": description,
     };
-}
+  }
+
+  // Empty constructor
+  factory ModuleModel.empty() {
+    return ModuleModel(
+      id: 0,
+      moduleName: "",
+      moduleType: "",
+      thumbnail: "",
+      storesCount: 0,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    );
+  }
 }
